@@ -1,7 +1,8 @@
-import React, { useState } from "react";
-import "./App.css"; 
+'use client'
 
-function App() {
+import { useState } from "react";
+import './Home.css'
+export default function Home() {
     const [jsonInput, setJsonInput] = useState("");
     const [response, setResponse] = useState(null);
     const [error, setError] = useState("");
@@ -14,7 +15,7 @@ function App() {
             setError("");
             const parsedInput = JSON.parse(jsonInput);
 
-            const res = await fetch("http://localhost:3005/bfhl", {
+            const res = await fetch("http://backend-bajaj-iota.vercel.app/bfhl", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(parsedInput),
@@ -34,23 +35,27 @@ function App() {
     return (
         <div className="container">
             <h1>ABCD123</h1>
-            <textarea 
-                placeholder="Enter JSON input" 
-                value={jsonInput} 
+            <textarea
+                className="json-input"
+                placeholder="Enter JSON input"
+                value={jsonInput}
                 onChange={(e) => setJsonInput(e.target.value)}
             />
-            <button onClick={handleSubmit}>Submit</button>
-            {error && <p className="error">{error}</p>}
+            <button className="submit-button" onClick={handleSubmit}>
+                Submit
+            </button>
+            {error && <p className="error-message">{error}</p>}
             {response && (
                 <>
                     <label>Select filters: Press Ctrl and select</label>
-                    <select 
-                        multiple 
+                    <select
+                        className="filter-select"
+                        multiple
                         onChange={(e) => setSelectedOptions([...e.target.selectedOptions].map(o => o.value))}
                     >
                         {options.map(opt => <option key={opt} value={opt}>{opt}</option>)}
                     </select>
-                    <div>
+                    <div className="response-container">
                         {selectedOptions.includes("Alphabets") && response.alphabets.length > 0 && (
                             <p><strong>Alphabets:</strong> {JSON.stringify({ "Alphabets": response.alphabets })}</p>
                         )}
@@ -66,5 +71,3 @@ function App() {
         </div>
     );
 }
-
-export default App;
