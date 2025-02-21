@@ -14,7 +14,7 @@ function App() {
             setError("");
             const parsedInput = JSON.parse(jsonInput);
 
-            const res = await fetch("http://localhost:3005/bfhl", {
+            const res = await fetch("http://backend-bajaj-iota.vercel.app/bfhl", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(parsedInput),
