@@ -14,8 +14,8 @@ export default function Home() {
         try {
             setError("");
             const parsedInput = JSON.parse(jsonInput);
-            const res = await fetch("http://backend-bajaj-iota.vercel.app/bfhl", {
-                method: "POST",
+            const res = await fetch("https://backb2.onrender.com/bfhl", {
+                method: "POST", 
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(parsedInput),
             });
